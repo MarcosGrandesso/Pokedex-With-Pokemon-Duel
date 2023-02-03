@@ -3,19 +3,46 @@
     <v-row justify="center" align="center">
       <v-col cols="6">
         <v-card>
-          <v-card-title class="headline"> Pokemons </v-card-title>
+          <v-card-title class="headline"> Duelos Dispniveis </v-card-title>
         </v-card>
       </v-col>
 
       <!-- <v-col cols="12">
         <Poke-form :form-label="'Nova Tarefa'" @new-task="addNewTask" />
       </v-col> -->
-<!-- <div class="d-flex maxw">
-  <v-col v-for="item in items" :key="item.id" cols="12">
-    <Poke :pokemon="item" />
-  </v-col>
-</div> -->
+<div class="d-flex maxw">
+  <div v-for="item in items" :key="item.id">
+    <duel-card :duels="item" @open-duel-modal="openModal"/>
+  </div>
+</div>
     </v-row>
+
+    <v-dialog
+        v-model="dialog2"
+        max-width="500px"
+      >
+        <v-card>
+          <v-card-title>
+            Hora Da Batalha
+          </v-card-title>
+          <v-card-text>
+            <v-select
+              :items="select"
+              label="Escolha Seu Pokemon"
+              item-value="text"
+            ></v-select>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="#952175"
+              text
+              @click="dialog2 = false"
+            >
+              Deixar a batalha pra lá
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
   </v-container>
 </template>
 
@@ -23,12 +50,13 @@
 import { useAppStore } from "@/stores/appStore"
 import TasksApi from "@/api/tasks.api.js"
 import mock from "@/api/api-mock"
-import Poke from "@/components/Poke.vue"
+import DuelCard from "@/components/DuelCard.vue"
 import PokeForm from "@/components/PokeForm.vue"
+// import DuelCard from '@/components/DuelCard.vue'
 
 export default {
   name: "TasksList",
-  components: { Poke, PokeForm },
+  components: { PokeForm, DuelCard },
   setup() {
     const appStore = useAppStore()
     return { appStore }
@@ -41,27 +69,23 @@ export default {
         id: 51,
         name: 'pikachu',
         type: 'repampago'
-      },{},{}]
+      },{},{}],
+      dialog2: false
     }
   },
   mounted() {
     // this.getPokes()
-    this.getPokes_mock()
+    this.getDuels()
 
   },
   methods: {
-    getPokes() {
-      this.loading = true
-      TasksApi.getTasks().then((data) => {
-        this.items = data.todos
-        this.loading = false
-      })
+    openModal() {
+      this.dialog2 =true
     },
-    async getPokes_mock() {
+    async getDuels() {
       this.loading = true
-      this.items = await mock.mocked_api.getPokes()
+      this.items = await mock.mocked_api.getDuelos()
       this.loading = false
-      console.log(this.items)
     },
     addNewTask(task) {
       this.loading = true
@@ -92,5 +116,6 @@ export default {
 .maxw {
   max-width: 600px;
   flex-flow: wrap;
+  justify-content: center;
 }
 </style>

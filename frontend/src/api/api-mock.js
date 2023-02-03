@@ -19,6 +19,30 @@ const mocked_api = {
       // {id:51,name:'pikachuloco', type: 'relampago', hp:14, armor : 4200, attack: 430},
     ]
       return later(result)
+  },
+  
+  async getDuelos(user=1) {
+    const result = [
+
+      { id : 1,
+        usuario : {name: 'marquinho duelista', pokemons:5, foto: 'https://avatars.githubusercontent.com/u/104371113?s=400&u=35cfd90eec5e2802cd5512f456cd7f1806a37fdf&v=4'},
+        vencedor : null,
+        pokemon : {id:6, name:'charizard', type: 'fogo', hp:134, armor : 200, attack: 30}
+      },
+      { id : 1,
+        usuario : {name: 'Tony Lampkins',pokemons:5, foto: 'https://avatars.githubusercontent.com/u/104371113?s=400&u=35cfd90eec5e2802cd5512f456cd7f1806a37fdf&v=4'},
+        vencedor : null,
+        pokemon : {id:6, name:'charizard', type: 'fogo', hp:134, armor : 200, attack: 30}
+      },
+      { id : 1,
+        usuario : {name: 'duelista', foto: 'https://avatars.githubusercontent.com/u/104371113?s=400&u=35cfd90eec5e2802cd5512f456cd7f1806a37fdf&v=4'},
+        vencedor : null,
+        pokemon : {id:6, name:'charizard', type: 'fogo', hp:134, armor : 200, attack: 30}
+      },
+      
+      // {id:51,name:'pikachuloco', type: 'relampago', hp:14, armor : 4200, attack: 430},
+    ]
+      return later(result)
   }
 }
 
