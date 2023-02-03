@@ -10,11 +10,11 @@
       <!-- <v-col cols="12">
         <Poke-form :form-label="'Nova Tarefa'" @new-task="addNewTask" />
       </v-col> -->
-<div class="d-flex maxw">
+<!-- <div class="d-flex maxw">
   <v-col v-for="item in items" :key="item.id" cols="12">
     <Poke :pokemon="item" />
   </v-col>
-</div>
+</div> -->
     </v-row>
   </v-container>
 </template>

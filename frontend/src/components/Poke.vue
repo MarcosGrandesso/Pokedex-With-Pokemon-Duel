@@ -1,50 +1,38 @@
 <template>
   <v-card
       class="mx-auto"
-      color="#26c6da"
+      :color="getCor(pokemon.type)"
       dark
-      max-width="400"
+      max-width="200"
     >
       <v-card-title>
-        <v-icon
-          large
-          left
-        >
-        mdi-swordyyyyy
-        </v-icon>
-        <span class="title font-weight-light">POKENAME</span>
+
+        <span class="title font-weight-light">{{pokemon.name}}</span>
       </v-card-title>
+      
+    <div class="d-flex">
+          <div>
+              <v-card-text class="headline font-weight-bold">
+                <v-icon large left >  mdi-heart </v-icon>
+                {{ pokemon.hp }}
 
-      <v-card-text class="headline font-weight-bold">
-        "Vue Rocks!"
-      </v-card-text>
+              </v-card-text>
+              <v-card-text class="headline font-weight-bold">
+                <v-icon large left >mdi-sword</v-icon>
+                {{ pokemon.attack }}
+              </v-card-text>
+        
+              <v-card-text class="headline font-weight-bold">
+                <v-icon large left > mdi-shield </v-icon>
+                {{ pokemon.armor }}
+              </v-card-text>
+          </div>
 
-      <v-card-actions>
-        <v-list-item class="grow">
-          <v-list-item-avatar color="grey darken-3">
-            <v-img
-              class="elevation-6"
-              height="200px"
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-            ></v-img>
-          </v-list-item-avatar>
+          <div>
+            <img :src="getUrl(pokemon.id)" alt="" class="imw">
+          </div>
+    </div>  
 
-          <v-list-item-content>
-            <v-list-item-title>Evan You</v-list-item-title>
-          </v-list-item-content>
-
-          <v-row
-            align="center"
-            justify="end"
-          >
-            <v-icon class="mr-1">mdi-heart</v-icon>
-            <span class="subheading mr-2">256</span>
-            <span class="mr-1">·</span>
-            <v-icon class="mr-1">mdi-share-variant</v-icon>
-            <span class="subheading">45</span>
-          </v-row>
-        </v-list-item>
-      </v-card-actions>
     </v-card>
 </template>
 
@@ -52,12 +40,45 @@
 export default {
   name: "TasksModel",
   props: {
-    task: {
+    pokemon: {
       type: Object,
       default: null,
       roger: "usalinter",
     },
   },
-  data: () => ({}),
+  data: () => ({
+    cor: '',
+    mapColor: {
+      'fogo' : 'red',
+      'relampago' : 'yellow',
+      'psyco' : 'blue-grey darken-1'
+    }
+  }),
+  methods: {
+    getCor(typo) {
+      return this.mapColor[typo]
+    },
+    getUrl(id) {
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    }
+  },
+  watch: {
+     pokemon() {
+      console.log(this.mapColor[pokemon.type])
+       this.cor = this.mapColor[pokemon.type]
+     },
+  }
 }
 </script>
+
+<style scoped>
+.imw {
+  height: 150px;
+}
+
+.v-card-text {
+  padding: 0;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+}
+</style>
