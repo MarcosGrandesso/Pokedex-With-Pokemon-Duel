@@ -5,7 +5,8 @@ def dapau(request):
     raise Exception("break on purpose")
 
 def create_pokemon(request):
-    print(request)
+    # print(dir(request))
+    print(request.body)
     # Pokemon.objects.create(
     #     title=,
     #     type=,
@@ -15,5 +16,5 @@ def create_pokemon(request):
     #     owner=,
     #     attack=
     # )
-    a = request.POST['name']
-    return HttpResponse(a)
+    # a = request.POST['name']
+    return HttpResponse()
