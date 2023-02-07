@@ -3,7 +3,7 @@
     <v-row justify="center" align="center">
       <v-col cols="6">
         <v-card>
-          <v-card-title class="headline"> Duelos Dispniveis </v-card-title>
+          <v-card-title class="headline"> Duelos Disponiveis </v-card-title>
         </v-card>
       </v-col>
 
@@ -26,19 +26,35 @@
             Hora Da Batalha
           </v-card-title>
           <v-card-text>
-            <v-select
+            <v-select v-if="!pokeToDuel"
+              v-model="pokeToDuel"
               :items="select"
               label="Escolha Seu Pokemon"
               item-value="text"
             ></v-select>
+            <div v-else class="d-flex gp">
+              <img :src="getUrl(pokemon[0].id)" alt="" class="imw">
+              <h1 class="margin">X</h1>
+              <img v-if="!vaiLutar" src="https://cdn-icons-png.flaticon.com/512/57/57108.png" alt="" class="imw">
+              <img v-else :src="getUrl(adversario.id)" alt="" class="imw">
+
+            
+            </div>
           </v-card-text>
           <v-card-actions>
             <v-btn
               color="#952175"
               text
-              @click="dialog2 = false"
+              @click="fugir"
             >
-              Deixar a batalha pra lá
+              Fugir
+            </v-btn>
+            <v-btn
+              color="#952175"
+              text
+              @click="initLuta(this.pokemon[0], this.adversario)"
+            >
+              Lutar
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -65,27 +81,53 @@ export default {
     return {
       loading: false,
       items: [],
-      pokemons: [{
-        id: 51,
-        name: 'pikachu',
-        type: 'repampago'
-      },{},{}],
-      dialog2: false
+      dialog2: false,
+      select:[],
+      pokeToDuel:'',
+      pokemon: {},
+      vaiLutar: false,
+      adversario: {}
     }
   },
   mounted() {
-    // this.getPokes()
+    this.getPokes()
     this.getDuels()
 
   },
+  watch: {
+     pokeToDuel() {
+      this.pokemon = this.select.filter((x) => x.title === this.pokeToDuel)
+      console.log(this.pokemon[0])
+     },
+  },
   methods: {
-    openModal() {
+    openModal(adversario) {
+      console.log(adversario.pokemon)
       this.dialog2 =true
+      this.adversario = adversario.pokemon
     },
     async getDuels() {
       this.loading = true
       this.items = await mock.mocked_api.getDuelos()
       this.loading = false
+    },
+    initLuta(pokemon, adversario) {
+      this.vaiLutar = true
+      let ataques_necessarios_pokemon =  (adversario.hp * adversario.armor) / pokemon.attack 
+      let ataques_necessarios_adversario=   (pokemon.hp * pokemon.armor) / adversario.attack  
+
+      let vencedor = ataques_necessarios_pokemon < ataques_necessarios_adversario ? pokemon : adversario
+      setTimeout(() => {
+        console.log('o vencedor foi: ')
+        console.log(vencedor)
+      }, 3000);
+
+      
+
+    },
+    fugir() {
+      this.pokeToDuel = ''
+      this.dialog2  = false
     },
     addNewTask(task) {
       this.loading = true
@@ -96,6 +138,12 @@ export default {
         console.log("oi")
       })
     },
+    getUrl(id) {
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    },
+    async getPokes() {
+      this.select = await mock.mocked_api.getPokes()
+    },
   },
 }
 </script>
@@ -104,7 +152,13 @@ export default {
 .done {
   text-decoration: line-through;
 }
+.imw {
+  height: 150px;
+}
 
+.gp {
+  gap: 4rem;
+}
 .v-col-12 {
   max-width: 33% !important;
 }
@@ -113,6 +167,9 @@ export default {
   flex-direction: column;
 }
 
+.margin {
+  margin-top: 3rem;
+}
 .maxw {
   max-width: 600px;
   flex-flow: wrap;

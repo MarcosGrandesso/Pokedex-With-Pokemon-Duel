@@ -33,7 +33,7 @@
                     outlined
                     rounded
                     small
-                    @click="$emit('open-duel-modal')"
+                    @click="$emit('open-duel-modal', duels)"
                   >
                   <v-icon>mdi-sword</v-icon> &nbsp; Aceitar Duelo 
                   </v-btn>

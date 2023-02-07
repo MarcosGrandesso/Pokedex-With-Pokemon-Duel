@@ -26,4 +26,18 @@ export default {
         })
     })
   },
+  populaPokemon: (params) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/create-pokemon", params )
+        // .then((response) => {
+        //   return resolve(response.data)
+        // })
+        // .catch((error) => {
+        //   return reject(error)
+        // })
+    })
+  },
 }
+
+
