@@ -9,10 +9,10 @@
               <div>
                 <v-card-title
                   class="text-h5"
-                  v-text="duels.usuario.name"
+                  v-text="duels?.challenger?.username"
                 ></v-card-title>
 
-                <v-card-subtitle >esse usuario tem  {{ duels.usuario.pokemons }} pokemons.</v-card-subtitle>
+                <v-card-subtitle >Quem ganhar leva o pokemon do adversario.</v-card-subtitle>
 
                 <v-card-actions>
                   <v-btn
@@ -45,7 +45,7 @@
                 size="125"
                 tile
               >
-                <v-img :src="duels.usuario.foto"></v-img>
+                <v-img height="70" src="https://cdn-icons-png.flaticon.com/512/2858/2858879.png"></v-img>
               </v-avatar>
             </div>
           </v-card>

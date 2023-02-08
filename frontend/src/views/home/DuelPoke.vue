@@ -28,7 +28,7 @@
           <v-card-text>
             <v-select v-if="!pokeToDuel"
               v-model="pokeToDuel"
-              :items="select"
+              :items="newSelect"
               label="Escolha Seu Pokemon"
               item-value="text"
             ></v-select>
@@ -86,7 +86,10 @@ export default {
       pokeToDuel:'',
       pokemon: {},
       vaiLutar: false,
-      adversario: {}
+      adversario: {},
+      vencedor: null,
+      newSelect: [],
+      duelo: {}
     }
   },
   mounted() {
@@ -96,19 +99,27 @@ export default {
   },
   watch: {
      pokeToDuel() {
-      this.pokemon = this.select.filter((x) => x.title === this.pokeToDuel)
-      console.log(this.pokemon[0])
+      this.pokemon = this.newSelect.filter((x) => x.title === this.pokeToDuel)
      },
   },
   methods: {
-    openModal(adversario) {
-      console.log(adversario.pokemon)
+    openModal(Duelo) { 
+      console.log("oi")
+      console.log(Duelo.pokemon)
       this.dialog2 =true
-      this.adversario = adversario.pokemon
+      this.adversario = Duelo.pokemon
+      this.duelo = Duelo
     },
     async getDuels() {
       this.loading = true
-      this.items = await mock.mocked_api.getDuelos()
+      // this.items = await mock.mocked_api.getDuelos()
+
+        TasksApi.getDuels().then((data) => {
+        this.items = data
+        this.loading = false
+      })
+
+
       this.loading = false
     },
     initLuta(pokemon, adversario) {
@@ -117,6 +128,10 @@ export default {
       let ataques_necessarios_adversario=   (pokemon.hp * pokemon.armor) / adversario.attack  
 
       let vencedor = ataques_necessarios_pokemon < ataques_necessarios_adversario ? pokemon : adversario
+      let perdedor = ataques_necessarios_pokemon < ataques_necessarios_adversario ? adversario : pokemon
+      TasksApi.finishDuel({'winner':vencedor,'loser': perdedor,  'duel':this.duelo}).then(()=>{
+
+      })
       setTimeout(() => {
         console.log('o vencedor foi: ')
         console.log(vencedor)
@@ -141,8 +156,17 @@ export default {
     getUrl(id) {
       return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
     },
-    async getPokes() {
-      this.select = await mock.mocked_api.getPokes()
+    getPokes() {
+    
+    TasksApi.getPokemon().then((data) => {
+        this.select = JSON.parse(data)
+        for(let i of this.select) {
+          i.fields.id = i.id
+            this.newSelect.push(i.fields)
+        }
+        // this.loading = false
+        // console.log(this.items)
+      })
     },
   },
 }

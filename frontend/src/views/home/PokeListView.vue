@@ -3,7 +3,7 @@
     <v-row justify="center" align="center">
       <v-col cols="6">
         <v-card>
-          <v-card-title class="headline"> Pokemons </v-card-title>
+          <v-card-title class="headline" @click="print()"> Pokemons </v-card-title>
         </v-card>
       </v-col>
 
@@ -45,16 +45,21 @@ export default {
     }
   },
   mounted() {
-    // this.getPokes()
-    this.getPokes_mock()
+    this.getPokes()
+    // this.getPokes_mock()
 
   },
   methods: {
+    print() {
+      console.log(this.items)
+    },
     getPokes() {
+
       this.loading = true
-      TasksApi.getTasks().then((data) => {
-        this.items = data.todos
+      TasksApi.getPokemon().then((data) => {
+        this.items = JSON.parse(data)
         this.loading = false
+        console.log(this.items)
       })
     },
     async getPokes_mock() {

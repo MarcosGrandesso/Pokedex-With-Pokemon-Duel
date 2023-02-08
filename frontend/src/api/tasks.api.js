@@ -30,12 +30,44 @@ export default {
     return new Promise((resolve, reject) => {
       api
         .post("/api/create-pokemon", params )
-        // .then((response) => {
-        //   return resolve(response.data)
-        // })
-        // .catch((error) => {
-        //   return reject(error)
-        // })
+    })
+  },
+  getPokemon: () => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/get-pokemon")
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
+  },
+
+  getDuels: () => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/get-duelos")
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
+  },
+
+  finishDuel: (vencedor) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/finish-duelo", vencedor )
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
     })
   },
 }

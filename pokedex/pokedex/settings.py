@@ -50,6 +50,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     # 'explorer',
+    "rest_framework",
 ]
 
 LOCAL_APPS = [
