@@ -70,6 +70,18 @@ export default {
         })
     })
   },
+  createDuel: (pokemon) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/create-duelo", {name:pokemon} )
+        // .then((response) => {
+        //   return resolve(response.data)
+        // })
+        // .catch((error) => {
+        //   return reject(error)
+        // })
+    })
+  },
 }
 
 

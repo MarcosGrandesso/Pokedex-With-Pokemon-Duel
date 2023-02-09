@@ -5,11 +5,16 @@
         <v-card>
           <v-card-title class="headline"> Duelos Disponiveis </v-card-title>
         </v-card>
+                      <v-btn
+      class="mx-2 mt-5"
+      fab
+      dark
+      color=""
+    >
+      Add Duelo
+    </v-btn>
       </v-col>
 
-      <!-- <v-col cols="12">
-        <Poke-form :form-label="'Nova Tarefa'" @new-task="addNewTask" />
-      </v-col> -->
 <div class="d-flex maxw">
   <div v-for="item in items" :key="item.id">
     <duel-card :duels="item" @open-duel-modal="openModal"/>
@@ -22,26 +27,32 @@
         max-width="500px"
       >
         <v-card>
-          <v-card-title>
+          <v-card-title v-if="!vencedor">
             Hora Da Batalha
           </v-card-title>
+          <v-card-title v-else>
+            {{vencedor.title}} Venceu !!!
+          </v-card-title>
           <v-card-text>
-            <v-select v-if="!pokeToDuel"
-              v-model="pokeToDuel"
-              :items="newSelect"
-              label="Escolha Seu Pokemon"
-              item-value="text"
-            ></v-select>
-            <div v-else class="d-flex gp">
-              <img :src="getUrl(pokemon[0].id)" alt="" class="imw">
-              <h1 class="margin">X</h1>
-              <img v-if="!vaiLutar" src="https://cdn-icons-png.flaticon.com/512/57/57108.png" alt="" class="imw">
-              <img v-else :src="getUrl(adversario.id)" alt="" class="imw">
-
-            
+            <div v-if="!vencedor">
+                <v-select v-if="!pokeToDuel"
+                  v-model="pokeToDuel"
+                  :items="newSelect"
+                  label="Escolha Seu Pokemon"
+                  item-value="text"
+                ></v-select>
+                <div v-else class="d-flex gp">
+                  <img :src="pokemon[0].img_url" alt="" class="imw">
+                  <h1 class="margin">X</h1>
+                  <img v-if="!vaiLutar" src="https://cdn-icons-png.flaticon.com/512/57/57108.png" alt="" class="imw">
+                  <img v-else :src="getUrl(adversario.id)" alt="" class="imw">
+                </div>
+            </div>
+            <div class="d-flex justify-center" v-else>
+              <img :src="vencedor.img_url" alt="" class="imw">
             </div>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions v-if="!vencedor">
             <v-btn
               color="#952175"
               text
@@ -57,8 +68,18 @@
               Lutar
             </v-btn>
           </v-card-actions>
+          <v-card-actions v-else>
+            <v-btn
+              color="#952175"
+              text
+              @click="fugir"
+            >Sair
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
+
+    <popup-create-duel :pokelist="newSelect"> </popup-create-duel>
   </v-container>
 </template>
 
@@ -68,11 +89,11 @@ import TasksApi from "@/api/tasks.api.js"
 import mock from "@/api/api-mock"
 import DuelCard from "@/components/DuelCard.vue"
 import PokeForm from "@/components/PokeForm.vue"
-// import DuelCard from '@/components/DuelCard.vue'
+import PopupCreateDuel from '../../components/popup-create-duel.vue'
 
 export default {
   name: "TasksList",
-  components: { PokeForm, DuelCard },
+  components: { PokeForm, DuelCard,PopupCreateDuel },
   setup() {
     const appStore = useAppStore()
     return { appStore }
@@ -89,7 +110,7 @@ export default {
       adversario: {},
       vencedor: null,
       newSelect: [],
-      duelo: {}
+      duelo: {},
     }
   },
   mounted() {
@@ -130,12 +151,12 @@ export default {
       let vencedor = ataques_necessarios_pokemon < ataques_necessarios_adversario ? pokemon : adversario
       let perdedor = ataques_necessarios_pokemon < ataques_necessarios_adversario ? adversario : pokemon
       TasksApi.finishDuel({'winner':vencedor,'loser': perdedor,  'duel':this.duelo}).then(()=>{
-
       })
       setTimeout(() => {
+        this.vencedor = vencedor
         console.log('o vencedor foi: ')
         console.log(vencedor)
-      }, 3000);
+      }, 1500);
 
       
 
@@ -154,6 +175,8 @@ export default {
       })
     },
     getUrl(id) {
+      console.log('oiii')
+      console.log(id)
       return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
     },
     getPokes() {

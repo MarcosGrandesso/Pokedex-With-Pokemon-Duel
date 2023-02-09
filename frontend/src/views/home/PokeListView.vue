@@ -12,7 +12,7 @@
       </v-col> -->
 <div class="d-flex maxw">
   <v-col v-for="item in items" :key="item.id" cols="12">
-    <Poke :pokemon="item" />
+    <Poke :pokemon="item" @click="goDuel"/>
   </v-col>
 </div>
     </v-row>
@@ -50,8 +50,8 @@ export default {
 
   },
   methods: {
-    print() {
-      console.log(this.items)
+    goDuel() {
+      this.$router.push({ name: "poke-duel" })
     },
     getPokes() {
 

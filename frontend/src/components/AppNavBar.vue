@@ -3,11 +3,7 @@
     <v-app-bar-title>{{ title }}</v-app-bar-title>
     <template #append>
       <v-btn icon="mdi-heart" :to="{ name: 'base-home' }"></v-btn>
-      <v-btn icon="mdi-magnify"></v-btn>
-      <v-btn
-        :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-        @click.stop="themeClick"></v-btn>
-
+      <v-btn icon="mdi-sword" @click="duel"></v-btn>
       <v-btn icon="mdi-dots-vertical">
         <v-icon icon="mdi-dots-vertical" />
         <v-menu activator="parent">
@@ -42,6 +38,9 @@ export default {
     themeClick() {
       this.$emit("themeClick")
     },
+    duel() {
+      this.$router.push({ name: "poke-duel" })
+    }
   },
 }
 </script>

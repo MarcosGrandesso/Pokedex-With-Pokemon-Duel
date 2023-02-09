@@ -58,3 +58,12 @@ def finish_duelo(request):
     duelo.save()
 
     return JsonResponse({}, safe=False)
+
+
+def create_duelo(request):
+    body = request.body
+    data = json.loads(body.decode("utf-8"))
+
+    poke = Pokemon.objects.get(title=data["name"])
+    Duelo.objects.create(challenger_id=request.user.id, pokemon_id=poke.id)
+    return JsonResponse({}, safe=False)
