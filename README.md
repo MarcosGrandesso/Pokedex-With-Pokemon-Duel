@@ -1,93 +1,45 @@
-# 1. Dev-env, super-easy mode (docker all things)
+<h1 align="center">
+  <img src="https://imagensemoldes.com.br/wp-content/uploads/2020/04/Logo-Pokebola-Pok%C3%A9mon-PNG-1200x900.png" width="200" alt="globo do pokemon" border="0">
+<br>
+<br>
+POKEDEX C/ Feature de Duelos
+</h1>
 
-Requirements:
-- [Install docker](https://docs.docker.com/install/)
-- Learn [Python](https://docs.python.org/3/tutorial/) and [Django](https://docs.djangoproject.com/en/2.0/intro/tutorial01/)
-- Learn [vue.js](vuejs.org)
-- Learn [Nuxt.js](https://nuxtjs.org/)
-- Get familiar with [Vuetify.js](vuetifyjs.com/) components
+> Tecnologias do Projeto: 
+Pytest -- Django -- Vue -- Postgres
 
-Step by step
+## COMO RODAR O PROJETO
+Copiar projeto do repositório
+`git clone https://github.com/MarcosGrandesso/Pokedex--with-pokemon-Duel.git`
 
-```bash
-source dev.sh  # import useful bash functions
-devhelp  # like this one ;)
-dkbuild  # builds the docker image for this project. The first time Will take a while.
-dknpminstall  # I'll explain later!
-dkup  # Brings up everything
-```
+Instalação do node_modules
+`npm or yarn install`
 
-With `dkup` running, open another terminal
+Para iniciar o Bundle
+`npm or yarn start`
 
-```bash
-dk bash  # starts bash inside "pokedex" container
-./manage.py migrate  # create database tables and stuff
-./manage.py createsuperuser  # creates an application user in the database
-```
+Para rodar a aplicação
+`npm or yarn android or ios`
 
-What is happenning:
 
-* `dev.sh` is a collection of useful bash functions for this project's development environment. You're encouraged to look inside and see how that works, and add more as the project progresses.
-* `dknpminstall` will start a docker container and run `npm install` inside to download node dependencies to the `frontend/node_modules` folder. Using docker for this means you don't need to worry about installing (and choosing version for) node/npm.
-* `dkup` uses docker-compose to start 3 containers: postgres, nginx, and pokedex.
-* The dockerized postgres saves its state into `docker/dkdata`. You can delete that if you want your dev database to go kaboom.
-* Once `dkup` is running, `dk <command>` will run `<command>` inside the `pokedex` container. So `dk bash` will get you "logged in" as root inside that container. Once inside, you need to run Django's `manage.py` commands to initialize the database properly.
-* The pokedex container runs 3 services:
- * django on port 8000
- * nuxt frontend with real APIs on port 3000
- * nuxt frontend with mock APIs on port 3001
-* nginx is configured to listen on port 80 and redirect to 8000 (requests going to `/api/*`) or 3000 (everything else).
-* Therefore, when `dkup` is running, you get a fully working dev-environment by pointing your browser to http://localhost, and a frontend-only-mock-api-based environment by pointing your browser to http://localhost:3001. Each one is more useful on different situations.
-* You're supposed to create features first by implementing them on 3001, then validate them, and only then write the backend APIs and integrate them. Experience shows this process is very productive.
+## Demostration
+<br>
+  <img src="/app/assets_readme/image (25).png" alt="Portugues: demostrando o resultado do teste de consumo da api do pokemon, Ingles: demonstrating the pokemon api consumption test result" border="0">
+<br>
 
-# 2. Dev-env, normal-easy mode (dockerize nginx + postgres)
 
-Running everything inside docker is a quick and easy way to get started, but sometimes we need to run things "for real", for example, when you need to debug python code.
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
 
-## Python setup
 
-Requirements:
- - Understand about python [virtualenvs](https://docs.python.org/3/tutorial/venv.html)
- - Install [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) (not required, but recommended)
+## Author
+<img src="https://avatars1.githubusercontent.com/u/6500430?s=460&u=42d7e22fa1c77b061505fe1cfc3fcaa3e2a4d1e5&v=4" width="80" alt="linkedin.com/in/junior-dev">
+:guitar: JR Dev :guitar:
+<br />
 
-Step by step
+LinkedIn: https://www.linkedin.com/in/junior-dev <br />
+GitLab: https://gitlab.com/hjrdev <br />
+Email: astronomi@gmail.com <br />
+<br />
 
-```bash
-dkpgnginx  # Starts postgres and nginx inside docker
-```
-
-With `dkpgnginx` running, start another terminal:
-
-```bash
-mkvirtualenv pokedex -p python3  # creates a python3 virtualenv
-pip install -r requirements.txt  # install python dependencies inside virtualenv
-export DJANGO_DB_PORT=5431  # That's where our dockerized postgres is listening
-./manage.py runserver  # starts django on port 8000
-```
-
-Since nginx is also running you go ahead and point your browser to http://localhost/admin and you should see the same thing as in http://localhost:8000/admin
-
-## Node Setup
-
-Requirements:
-
-* Install [nvm](https://github.com/creationix/nvm) (not required, but highly recommended)
-
-Step by step:
-
-```bash
-nvm use 9  # Switch your terminal for node version 9.x
-# no need to npm install anything, we already have our node_modules folder
-sudo chmod -R o+rw .nuxt/  # I'll explain this later
-npm run dev  # Starts nuxt frontend on port 3000
-```
-
-You can go ahed and point your browser to http://localhost:3000 to see nuxt running **with mocked apis**
-
-To run nuxt using real APIs just turn set this environment variable API_MOCK=0
-
-```bash
-API_MOCK=0 npm run dev  # Starts nuxt frontend on port 3000
-```
-
-Since nginx is also running you go ahead and point your browser to http://localhost/ and you should have a fully integrated frontend+backend dev env.
+Made with :heart: and lots of animation by :guitar: JR Dev :guitar:
