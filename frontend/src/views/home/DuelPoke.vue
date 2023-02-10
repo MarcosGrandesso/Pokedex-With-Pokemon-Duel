@@ -3,15 +3,15 @@
     <v-row justify="center" align="center">
       <v-col cols="6">
         <v-card>
-          <v-card-title class="headline"> Duelos Disponiveis </v-card-title>
-        </v-card>
-      </v-col>
+          <v-card-title class="headline text-center pb-5"> Duelos Disponiveis </v-card-title>
 <div class="d-flex maxw">
     <popup-create-duel :pokelist="newSelect" class="mb-5 mt-5"> </popup-create-duel>
   <div v-for="item in items" :key="item.id">
     <duel-card :duels="item" @open-duel-modal="openModal"/>
   </div>
 </div>
+        </v-card>
+      </v-col>
     </v-row>
 
     <v-dialog

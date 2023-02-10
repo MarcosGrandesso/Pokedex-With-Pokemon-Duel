@@ -3,18 +3,18 @@
     <v-row justify="center" align="center">
       <v-col cols="6">
         <v-card>
-          <v-card-title class="headline" @click="print()"> Pokemons </v-card-title>
+          <v-card-title class="headline pb-5 text-center" @click="print()"> Pokemons </v-card-title>
+          <div class="d-flex maxw justify-center">
+            <v-col v-for="item in items" :key="item.id" cols="12">
+              <Poke :pokemon="item" @click="goDuel"/>
+            </v-col>
+          </div>
         </v-card>
       </v-col>
 
       <!-- <v-col cols="12">
         <Poke-form :form-label="'Nova Tarefa'" @new-task="addNewTask" />
       </v-col> -->
-<div class="d-flex maxw">
-  <v-col v-for="item in items" :key="item.id" cols="12">
-    <Poke :pokemon="item" @click="goDuel"/>
-  </v-col>
-</div>
     </v-row>
   </v-container>
 </template>
@@ -95,7 +95,6 @@ export default {
 }
 
 .maxw {
-  max-width: 600px;
   flex-flow: wrap;
 }
 </style>

@@ -5,8 +5,7 @@
       dark
       max-width="200"
     >
-      <v-card-title>
-
+      <v-card-title class="d-flex">
         <h3 class="title font-weight-bold">{{pokemon.fields.title}}</h3>
       </v-card-title>
       
@@ -54,7 +53,7 @@ export default {
     mapColor: {
       'fire' : 'red',
       'electric' : 'yellow',
-      'psychic' : 'grey lighten-3',
+      'psychic' : 'deep-purple accent-1',
       'water' : 'blue lighten-2',
       'poison' : 'light-green accent-2',
       'grass' : 'green darken-4',
