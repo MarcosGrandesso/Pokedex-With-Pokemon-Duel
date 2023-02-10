@@ -2,7 +2,8 @@ import json
 
 from django.contrib.auth.models import User
 from django.core import serializers
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.views.decorators.http import require_POST
 from pokedex.base.models import Duelo, DueloSerializer, Pokemon
 
 # from base.poke_svc import serializa_pokes
@@ -66,4 +67,22 @@ def create_duelo(request):
 
     poke = Pokemon.objects.get(title=data["name"])
     Duelo.objects.create(challenger_id=request.user.id, pokemon_id=poke.id)
+    return JsonResponse({}, safe=False)
+
+
+@require_POST
+def cadastro(request):
+    body = request.body
+    data = json.loads(body.decode("utf-8"))
+    username = data["username"]
+    senha = data["senha"]
+    novo_usuario = User.objects.create_user(username=username, password=senha)
+
+    for i in range(0, 3):
+        p = Pokemon.objects.filter(owner_id__isnull=True).order_by("id").last()
+        p.owner_id = novo_usuario
+        p.save()
+
+    novo_usuario.save()
+
     return JsonResponse({}, safe=False)

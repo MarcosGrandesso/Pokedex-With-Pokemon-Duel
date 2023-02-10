@@ -82,6 +82,12 @@ export default {
         // })
     })
   },
+  cadastro: (username, senha, senha2) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("/api/register-user", {username:username, senha:senha, senha2:senha2})
+    })
+  },
 }
 
 

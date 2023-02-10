@@ -5,17 +5,9 @@
         <v-card>
           <v-card-title class="headline"> Duelos Disponiveis </v-card-title>
         </v-card>
-                      <v-btn
-      class="mx-2 mt-5"
-      fab
-      dark
-      color=""
-    >
-      Add Duelo
-    </v-btn>
       </v-col>
-
 <div class="d-flex maxw">
+    <popup-create-duel :pokelist="newSelect" class="mb-5 mt-5"> </popup-create-duel>
   <div v-for="item in items" :key="item.id">
     <duel-card :duels="item" @open-duel-modal="openModal"/>
   </div>
@@ -45,7 +37,7 @@
                   <img :src="pokemon[0].img_url" alt="" class="imw">
                   <h1 class="margin">X</h1>
                   <img v-if="!vaiLutar" src="https://cdn-icons-png.flaticon.com/512/57/57108.png" alt="" class="imw">
-                  <img v-else :src="getUrl(adversario.id)" alt="" class="imw">
+                  <img v-else :src="adversario.img_url" alt="" class="imw">
                 </div>
             </div>
             <div class="d-flex justify-center" v-else>
@@ -79,7 +71,6 @@
         </v-card>
       </v-dialog>
 
-    <popup-create-duel :pokelist="newSelect"> </popup-create-duel>
   </v-container>
 </template>
 

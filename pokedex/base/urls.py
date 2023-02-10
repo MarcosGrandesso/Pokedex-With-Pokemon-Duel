@@ -11,4 +11,5 @@ urlpatterns = [
     path("get-duelos", views.get_duelos),
     path("finish-duelo", views.finish_duelo),
     path("create-duelo", views.create_duelo),
+    path("register-user", views.cadastro),
 ]

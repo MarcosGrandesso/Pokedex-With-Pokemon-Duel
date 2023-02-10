@@ -7,13 +7,13 @@
           <v-card-text>
             <h2>Finalizar sessão?</h2>
             <p class="ma-4">
-              <v-btn :loading="loading" color="primary" class="mr-4" x-large block @click="logout">
+              <v-btn :loading="loading" color="red" class="mr-4" x-large block @click="logout">
                 SIM
               </v-btn>
               <v-btn
                 class="my-2"
                 block
-                color="primary"
+                color="red"
                 variant="outlined"
                 :to="{ name: 'base-home' }">
                 Início

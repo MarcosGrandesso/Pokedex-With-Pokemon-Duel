@@ -7,7 +7,7 @@
       <VMain>
         <RouterView />
       </VMain>
-      <app-footer :fixed="true" :user="loggedUser" />
+      <!-- <app-footer :fixed="true" :user="loggedUser" /> -->
     </VApp>
   </VLayout>
 </template>

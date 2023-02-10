@@ -7,17 +7,18 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="primary"
+          color="#952175"
           dark
           v-bind="attrs"
           v-on="on"
           @click="open"
         >
-          Open Dialog
+          Criar Duelo
         </v-btn>
       </template>
       <v-card>
-        <v-card-title>Select Country</v-card-title>
+        <v-card-title>Escolha o seu pokemon </v-card-title>
+        <v-card-text>Ao Criar o duelo outros Jogadores poderão aceitar o desafio, caso vc perder, seu pokemon vai junto.</v-card-text>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <v-radio-group
@@ -28,31 +29,23 @@
               :label="i.title"
               :value="i.title"
             ></v-radio>
-            <!-- <v-radio
-              label="Burma"
-              value="burma"
-            ></v-radio> -->
-            <v-radio
-              label="Burundi"
-              value="burundi"
-            ></v-radio> -->
           </v-radio-group>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn
-            color="blue darken-1"
+            color="#952175"
             text
             @click="dialog = false"
           >
-            Close
+            Sair
           </v-btn>
           <v-btn
-            color="blue darken-1"
+            color="#952175"
             text
             @click="createDuel(dialogm1)"
           >
-            Save
+            Criar
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -83,6 +76,8 @@ import TasksApi from "@/api/tasks.api.js"
       },
       createDuel(poke) {
         TasksApi.createDuel(poke)
+        this.dialog= false
+
       }
     }
   }

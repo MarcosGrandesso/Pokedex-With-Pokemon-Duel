@@ -2,8 +2,8 @@
   <v-container>
     <v-row align="center" class="centraliza" no-gutters>
       <v-col cols="12" sm="6" offset-sm="3">
-        <div class="pa-2"> <h1>Login</h1> </div>
-        <v-form>
+        <div class="pa-2"> <h1>{{ cadastro ? 'Cadastro' : 'Login'}}</h1> </div>
+        <v-form v-if="!cadastro">
           <v-text-field
             v-model="username"
             label="Username"
@@ -31,14 +31,45 @@
             Login
           </v-btn>
           <v-btn
+            @click="cad"
             class="my-2"
             block
             size="large"
             rounded="pill"
             color="white"
             variant="outlined"
-            :to="{ name: 'base-home' }">
-            Início
+            >
+            Cadastrar
+          </v-btn>
+        </v-form>
+        <v-form v-else>
+          <v-text-field
+            v-model="username"
+            label="Escolha um Username"
+            prepend-inner-icon="mdi-email-fast-outline"
+            variant="outlined"
+            required
+            @keyup.enter="login"></v-text-field>
+
+          <v-text-field
+            v-model="password"
+            type="password"
+            label="escolha uma senha"
+            prepend-inner-icon="mdi-key-outline"
+            variant="outlined"
+            required
+            ></v-text-field>
+
+          <v-btn
+            block
+            size="large"
+            rounded="pill"
+            color="red"
+            append-icon="mdi-chevron-right"
+            :disabled="!username || !password"
+            @click="registrar"
+            >
+            Cadastrar
           </v-btn>
         </v-form>
       </v-col>
@@ -49,6 +80,7 @@
 <script>
 import { mapState } from "pinia"
 import AccountsApi from "@/api/accounts.api.js"
+import api from '@/api/tasks.api'
 import { useAppStore } from "@/stores/appStore"
 import { useAccountsStore } from "@/stores/accountsStore"
 
@@ -66,6 +98,7 @@ export default {
       password: "",
       error: false,
       visible: false,
+      cadastro : false
     }
   },
   computed: {
@@ -82,6 +115,14 @@ export default {
     })
   },
   methods: {
+    cad() {
+      this.cadastro = true
+    },
+    registrar(){
+      api.cadastro(this.username, this.password, this.password2)
+      this.cadastro =false
+
+    },
     login() {
       this.loading = true
       AccountsApi.login(this.username, this.password)
