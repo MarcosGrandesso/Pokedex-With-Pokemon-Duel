@@ -23,9 +23,12 @@ Para rodar a aplicação
 
 
 ## Demostration
-<br>
-  <img src="/app/assets_readme/image (25).png" alt="Portugues: demostrando o resultado do teste de consumo da api do pokemon, Ingles: demonstrating the pokemon api consumption test result" border="0">
-<br>
+![Peek 10-02-2023 18-27](https://user-images.githubusercontent.com/104371113/218201685-a03aad4b-ddca-4e57-86f7-2511caa6b01e.gif)
+![image (29)](https://user-images.githubusercontent.com/104371113/218199360-1651ad31-0265-472c-9c7e-ecbe562db91d.png)
+![image](https://user-images.githubusercontent.com/104371113/218199418-a08cf11a-4146-41dd-ab81-43313182e2a3.png)
+![image (26)](https://user-images.githubusercontent.com/104371113/218199131-cf9a399a-803d-43e4-8ebf-99652f6b68b2.png)
+![image (25)](https://user-images.githubusercontent.com/104371113/218199141-5d116b61-d9bc-4c41-bd14-cd6956cb7109.png)
+
 
 
 ## License
