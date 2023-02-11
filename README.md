@@ -12,14 +12,23 @@ Pytest -- Django -- Vue -- Postgres
 Copiar projeto do repositório
 `git clone https://github.com/MarcosGrandesso/Pokedex--with-pokemon-Duel.git`
 
-Instalação do node_modules
-`npm or yarn install`
+builda os containers, muito importante
+`docker compose build`
 
-Para iniciar o Bundle
-`npm or yarn start`
+subir os containers
+`docker compose up -d`
 
-Para rodar a aplicação
-`npm or yarn android or ios`
+suba o server
+`docker compose exec backend ./manage.py runserver`
+
+popula o banco
+`docker compose exec backend ./manage.py popula_pokemons`
+
+se registre
+logue
+veja seus pokemons e duele
+e seja feliz
+
 
 
 ## Demostration

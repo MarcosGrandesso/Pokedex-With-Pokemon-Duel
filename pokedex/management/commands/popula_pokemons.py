@@ -1,6 +1,7 @@
 import requests
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from pokedex.base.models import Pokemon
+from pokedex.base.models import Duelo, Pokemon
 
 
 class Command(BaseCommand):
@@ -35,4 +36,7 @@ class Command(BaseCommand):
                 armor=pokemon_data["stats"][3]["base_stat"],
                 attack=pokemon_data["stats"][4]["base_stat"],
             )
+
+        user = User.objects.create_user(username='adm',password='password')
+        Duelo.objects.create(challenger_id=user.id, pokemon_id=48)
         self.stdout.write(self.style.SUCCESS("pokemon criando"))
