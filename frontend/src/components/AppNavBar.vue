@@ -1,5 +1,12 @@
 <template>
   <v-app-bar>
+    <v-btn
+      class="ma-2"
+      color="purple"
+      icon="mdi-wrench"
+      size="x-large"
+      @click="themeClick"
+    >🌓</v-btn>
     <v-app-bar-title>{{ title }}</v-app-bar-title>
     <template #append>
       <v-btn icon="mdi-heart" :to="{ name: 'base-home' }"></v-btn>
