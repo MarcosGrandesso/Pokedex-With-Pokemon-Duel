@@ -29,10 +29,6 @@ logue
 veja seus pokemons e duele
 e seja feliz
 
-## link da apresentação
-https://youtu.be/D1oibn53gXI
-
-
 ## Demostration
 
 ![image](https://user-images.githubusercontent.com/104371113/218199418-a08cf11a-4146-41dd-ab81-43313182e2a3.png)
