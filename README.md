@@ -6,7 +6,10 @@ POKEDEX C/ Feature de Duelos
 </h1>
 
 > Tecnologias do Projeto: 
-Pytest -- Django -- Vue -- Postgres
+Python -- Django -- Vue -- Postgres -- docker
+
+## TO DO
+`fazer deploy desse projeto`
 
 ## COMO RODAR O PROJETO
 Copiar projeto do repositório
