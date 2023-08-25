@@ -13,7 +13,7 @@ services:
     # command: ./docker/bin/start_dev.sh
     # command: bash -c "sleep infinity"
     expose:
-      - "8000"
+      - "8080"
     volumes:
       - ./:/app
     depends_on:
