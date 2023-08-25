@@ -19,7 +19,7 @@ app.use(multer().array());
 app.use(cookieParser());
 
 //CONFIG
-const PORT = process.env.APIMOCK_PORT || 8000;
+const PORT = process.env.APIMOCK_PORT || 8080;
 const ORIGIN_URL = process.env.ORIGIN_URL || "http://localhost:3000";
 
 app.use(cors({ credentials: true, origin: ORIGIN_URL }));
