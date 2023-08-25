@@ -6,4 +6,4 @@ wait-for-it $POSTGRES_HOST:$POSTGRES_PORT
 ./manage.py migrate --noinput
 
 cd /app
-DEBUG=1 ./manage.py runserver 0.0.0.0:8080
+DEBUG=1 ./manage.py runserver 0.0.0.0:8000

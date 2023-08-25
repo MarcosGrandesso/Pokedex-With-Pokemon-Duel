@@ -36,6 +36,6 @@ ENV SHELL=/bin/bash LANG=en_US.UTF-8
 
 COPY . ./
 
-EXPOSE 8080
+EXPOSE 8000
 
 # COPY docker/bin/* /usr/bin/
